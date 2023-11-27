@@ -1,0 +1,11 @@
+siam logo in navbar not animating accto need        or         cros and toggle button at ssame position
+
+while sliding from small to large in menu it do not change imediately to flex-row (only when toggle is true)
+
+
+
+---------------------------------------|||  HOME PAGE |||------------------------------
+
+framer ticker animation / slideshow
+good design
+juit reference
