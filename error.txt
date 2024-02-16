@@ -9,3 +9,10 @@ while sliding from small to large in menu it do not change imediately to flex-ro
 framer ticker animation / slideshow
 good design
 juit reference
+
+
+
+
+---------------------------------------|||  Report PAGE |||------------------------------
+
+integrate Report page on click view Report button in event page.

@@ -52,12 +52,13 @@ const Home = () => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		autoplay: true,
-		autoplaySpeed: 2000,
+		autoplaySpeed: 1000,
 		adaptiveHeight:true,
 		pauseOnHover: true,
 		vertical: true,
       	verticalSwiping: true,
 		// centerMode:true,
+		// slidesToShow:3,
 		// fade:true,
 		arrows:false
 	  };
@@ -66,8 +67,8 @@ const Home = () => {
 	const shuffleArray = (array) => {
 		return array.slice().sort(() => Math.random() - 0.5);
 	};
-	const imgArr2 = shuffleArray(imgArr);
-	const imgArr3 = shuffleArray(imgArr2); 
+	// const imgArr2 = shuffleArray(imgArr);
+	// const imgArr3 = shuffleArray(imgArr2); 
 
 	// console.log(shuffledArray1);
 	// console.log(shuffledArray2);
