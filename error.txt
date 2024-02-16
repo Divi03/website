@@ -10,9 +10,13 @@ framer ticker animation / slideshow
 good design
 juit reference
 
+---------------------------------------|||  Report PAGE |||------------------------------
+card flip and discription
+
 
 
 
 ---------------------------------------|||  Report PAGE |||------------------------------
 
 integrate Report page on click view Report button in event page.
+
