@@ -6,11 +6,14 @@ while sliding from small to large in menu it do not change imediately to flex-ro
 
 ---------------------------------------|||  HOME PAGE |||------------------------------
 
-framer ticker animation / slideshow
-good design
+ticker animation  ?? good design
+
 juit reference
 
+Responsive ??
+
 ---------------------------------------|||  Report PAGE |||------------------------------
+
 card flip and discription
 
 
@@ -19,4 +22,15 @@ card flip and discription
 ---------------------------------------|||  Report PAGE |||------------------------------
 
 integrate Report page on click view Report button in event page.
+
+
+
+
+---------------------------------------|||  EVENTS PAGE |||------------------------------
+
+use 'src/Assets/Images/future_events_template.png'  for new ui.
+
+
+
+
 

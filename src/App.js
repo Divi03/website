@@ -13,6 +13,7 @@ function App() {
   return (
     <>
       <Navbar/>
+	  <div className='pt-[0]'>
 	  	<Routes>
 			<Route exact path='/' element={<Home/>}/>
 			<Route exact path='/about' element={<About/>}/>
@@ -21,9 +22,8 @@ function App() {
 			<Route exact path='/contact' element={<Contact/>}/>
 			<Route exact path="/viewreport" element={<Report />} />
 			{/* <Route path="/viewreport/:url" render={({ props }) => <Report {...props} />} /> */}
-
-
 		</Routes>
+	 	</div>
     </>
   )
 }

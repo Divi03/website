@@ -1,0 +1,74 @@
+/* #word-cloud-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+} */
+
+/* Style for each word */
+.word {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 2s forwards, typing 2s steps(30, end);
+  white-space: nowrap;
+}
+
+/* Define a good font family for the word cloud */
+
+
+/* Define gradient backgrounds */
+/* Gradient backgrounds for word elements */
+.gradient-1 {
+  background: linear-gradient(45deg, #f3ec78, #af4261);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-2 {
+  background: linear-gradient(45deg, #2193b0, #6dd5ed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-3 {
+  background: linear-gradient(45deg, #ff6e7f, #bfe9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Additional styles for fade-out effect */
+.word.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+
+.word.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

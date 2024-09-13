@@ -1,97 +1,207 @@
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-
-// const Events = () => {
-//   const [events, setEvents] = useState([
-//     { id: 1, name: 'Event 1', description: 'Description of Event 1', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' },
-//     { id: 2, name: 'Event 2', description: 'Description of Event 2', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' },
-//     { id: 3, name: 'Event 3', description: 'Description of Event 3', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' }
-//   ]);
-
-//   const newEvent = false; // Change this to true if there's a new event
-
-//   return (
-//     <div className='events__container mt-4 w-screen h-screen md:pt-4 absolute flex justify-center md:justify-around items-center flex-col-reverse md:flex-row'>
-      
-//       {/* Event List Div */}
-//       <div className='flex h-4/5 md:h-4/5 w-full md:w-[40%] border-2 flex-col justify-center items-center'>
-//         <h2>Event List</h2>
-//         <div className='overflow-y-auto h-full'>
-//           <ul className='divide-y-2 > * + *'>
-//             {events.map(event => (
-//               <li key={event.id} className="mb-4">
-//                 <div className='flex flex-row'>
-//                   <h3>{event.name}</h3>
-//                   <img src={event.imageUrl} alt={event.name} className="h-[15rem] mb-2" />
-//                   <p>{event.description}</p>
-//                   <Link to={`${event.pdfUrl}`}  className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View PDF</Link>
-//                 </div>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       </div>
-
-//       {/* New Event Div */}
-
-//       {/* For new event Make A Popup window */}
-//       {/* <div className='flex h-auto md:h-4/5 w-full md:w-[40%] border-2 flex-col justify-center items-center'>
-//         {newEvent ? (
-//           <React.Fragment>
-//             <h2>New Event</h2>
-//           </React.Fragment>
-//         ) : (
-//           <p>No new event</p>
-//         )}
-//       </div> */}
-
-
-//     </div>
-//   );
-// }
-
-// export default Events;
-
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const Events = () => {
-  const [events, setEvents] = useState([
-    { id: 1, name: 'Event 1', description: 'Description of Event 1', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' },
-    { id: 2, name: 'Event 2', description: 'Description of Event 2', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' },
-    { id: 3, name: 'Event 3', description: 'Description of Event 3', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://drive.google.com/file/d/1Uq1ujdFYz0XnO9KBtitSWTUyb-q5lDlp/preview' }
-  ]);
+  // Assuming new event and events by year are passed as props or managed in state
+  const [newEvent, setNewEvent] = useState({
+    name: 'New Event',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum iusto sunt aspernatur velit, explicabo rerum cum atque neque molestiae asperiores eveniet expedita nam. Pariatur quisquam saepe unde harum voluptate. Et.',
+    imageUrl: 'https://content.presentermedia.com/files/clipart/00029000/29878/wanted_poster_800_wht.jpg',
+    formUrl: 'https://your-form-url.com',  // Replace with your actual form URL
+    lastDateToRegister: '27/10/2024',
+    eventDate: '28/10/24'
+  });
+
+  const [eventsByYear, setEventsByYear] = useState({
+    '2021': [
+      { id: 1, name: 'Event A', description: 'Description of Event A', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-a.pdf' },
+      { id: 2, name: 'Event B', description: 'Description of Event B', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-b.pdf' }
+    ],
+    '2022': [
+      { id: 1, name: 'Event X', description: 'Description of Event X', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-x.pdf' }
+    ],
+    '2025': [
+      { id: 1, name: 'Event Y', description: 'Description of Event Y', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-y.pdf' }
+    ]
+    // Add more years as needed
+  });
+
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  const [selectedYear, setSelectedYear] = useState(null); // Default selected year
+
+  // Select the latest year automatically on component mount
+  useEffect(() => {
+    const years = Object.keys(eventsByYear);
+    const latestYear = years[years.length - 1]; // Get the last (latest) year from eventsByYear object
+    setSelectedYear(latestYear); // Set the selectedYear state to the latest year
+  }, [eventsByYear]); // Only run this effect when eventsByYear changes
+
+  const handleYearChange = (e) => {
+    setSelectedYear(e.target.value);
+  };
+
+  if (!selectedYear) {
+    return <div>Loading...</div>; // Placeholder for when selectedYear is null (initial state)
+  }
 
   return (
-    <div className='events__container w-screen h-screen md:p-8 absolute flex justify-around items-center flex-col-reverse md:flex-row'>
-      
-      {/* Event List Div */}
-      <div className='flex h-4/5 md:h-4/5 w-full border-2 flex-col justify-center items-center'>
-        <h2>Event List</h2>
-        <div className='overflow-y-auto h-full'>
-          <ul className=''>
-            {events.map(event => (
-              <li key={event.id} className="mb-4">
-                <div className='bg-white rounded-lg shadow-md'>
-                  <img src={event.imageUrl} alt={event.name} className=" w-64 h-[90%] object-cover rounded-lg" />
-                  <div className="p-4 flex justify-around">
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">{event.name}</h3>
-                      <p className="text-gray-700 mb-2">{event.description}</p>
-                    </div>
-                    <Link to={`${event.pdfUrl}`} className="mt-2 h-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">View PDF</Link>
+    <div className='min-h-screen flex flex-col items-center pt-24'>
+
+      {/* New event section */}
+      {newEvent && newEvent.name ? (
+        <>
+          {/* for Larger screen */}
+          <div className='hidden sm:flex w-4/5 h-[45vh] m-2 border-gray-400 border-double border-[2px] justify-evenly items-center relative'>
+            <div className='newEvent__image h-full w-auto'>
+              <img src={newEvent.imageUrl} alt={newEvent.name} className='w-full h-full object-cover' />
+            </div>
+
+            <div className='newEvent__details flex flex-col justify-start items-center w-[45%] h-full p-4'>
+              <h4 className='text-xl font-bold mb-2 text-center'>{newEvent.name}</h4>
+              <p className='text-gray-600 mb-2 overflow-scroll h-[50%]'>{newEvent.description}</p>
+              <div className='flex flex-col mb-2 w-full'>
+                <span className='text-gray-500 text-sm'>Event Date:</span>
+                <span className='text-gray-800'>{newEvent.eventDate}</span>
+              </div>
+              <div className='flex flex-col mb-2 w-full'>
+                <span className='text-gray-500 text-sm'>Last Date to Register:</span>
+                <span className='text-gray-800'>{newEvent.lastDateToRegister}</span>
+              </div>
+              <a
+                href={newEvent.formUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center block'
+                style={{ maxWidth: '200px' }}
+              >
+                Register
+              </a>
+            </div>
+          </div>
+          
+
+          {/* for small screen */}
+          <div className='flex sm:hidden w-full h-[45vh] m-2 border-gray-400 border-double border-[2px] relative'>
+            <div className='relative w-full h-full flex flex-col justify-center items-center perspective-1000'>
+              {/* Front Side (Image) */}
+              <div
+                className={`absolute w-full h-full transition-transform duration-500 transform ${
+                  isFlipped ? 'rotate-y-180' : 'rotate-y-0'
+                } flex flex-col justify-center items-center`}
+                style={{ display: isFlipped ? 'none' : 'flex' }}
+              >
+                <div className='h-full w-full overflow-hidden'>
+                  <img
+                    src={newEvent.imageUrl}
+                    alt={newEvent.name}
+                    className='w-full h-full object-contain cursor-pointer'
+                    onClick={handleFlip}
+                  />
+                  <button
+                    className='absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-2 rounded-md'
+                    onClick={handleFlip}
+                  >
+                    Info
+                  </button>
+                </div>
+              </div>
+
+              {/* Back Side (Details) */}
+              <div
+                className={`absolute w-full h-full bg-white p-4 flex flex-col justify-center items-center transition-transform duration-500 transform ${
+                  isFlipped ? 'rotate-y-0' : 'rotate-y-180'
+                }`}
+                style={{ display: isFlipped ? 'flex' : 'none' }}
+              >
+                <h4 className='text-xl font-bold mb-2 text-center'>{newEvent.name}</h4>
+                <p className='text-gray-600 m-2 overflow-scroll h-[55%] w-[90%]'>{newEvent.description}</p>
+                <hr className="w-full" />
+                <div className='flex flex-row justify-between mb-2 w-full'>
+                  <div className='flex flex-col'>
+
+                    <span className='text-gray-500 text-sm'>Event Date:</span>
+                    <span className='text-gray-800'>{newEvent.eventDate}</span>
+                  </div>
+
+                  <div className='flex flex-col'>
+
+                    <span className='text-gray-500 text-sm'>Last Date to Register:</span>
+                    <span className='text-gray-800'>{newEvent.lastDateToRegister}</span>
                   </div>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+                <a
+                  href={newEvent.formUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center block'
+                  style={{ maxWidth: '200px' }}
+                >
+                  Register
+                </a>
+                <button
+                  className='mt-4 text-blue-500 underline'
+                  onClick={handleFlip}
+                >
+                  Back
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      {/* Year selector */}
+      <div className='m-2 p-2 text-justify w-11/12 shadow-sm rounded-md'>
+        <h2 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-tight'>
+          A Year in SIAM
+        </h2>
       </div>
 
-      {/* New Event Div */}
-      {/* You can add the new event section if needed */}
+      <div className='w-4/5 mb-4 flex justify-center items-center'>
+        <label className='block text-sm font-medium text-gray-700 p-2'>Select Year:</label>
+        <select
+          className='mt-1 block w-min p-2 border border-gray-300 rounded-md'
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          {Object.keys(eventsByYear).map(year => (
+            <option key={year} value={year}>{year}</option>
+          ))}
+        </select>
+      </div>
 
+      {/* Year-wise events section */}
+      <div className='w-full sm:w-90 md:w-4/5 px-4'>
+        {eventsByYear[selectedYear].map(event => (
+          <div key={event.id} className='flex items-center justify-between bg-white shadow-lg rounded-lg p-4 mb-4'>
+            {/* Left side: Title, Description, and View Report button */}
+            <div className='flex-1'>
+              <h2 className='text-xl font-bold mb-2'>{event.name}</h2>
+              <p className='text-gray-600 mb-2'>{event.description}</p>
+              <a
+                href={event.pdfUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md inline-block'
+              >
+                View Report
+              </a>
+            </div>
+            {/* Right side: Event Image */}
+            <div className='flex-shrink-0 w-32 h-32 ml-4'>
+              <img
+                src={event.imageUrl}
+                alt={event.name}
+                className='w-full h-full object-cover rounded-lg'
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
