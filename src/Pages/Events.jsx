@@ -2,28 +2,24 @@ import React, { useEffect, useState } from 'react';
 
 const Events = () => {
   // Assuming new event and events by year are passed as props or managed in state
-  const [newEvent, setNewEvent] = useState({
-    name: 'New Event',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum iusto sunt aspernatur velit, explicabo rerum cum atque neque molestiae asperiores eveniet expedita nam. Pariatur quisquam saepe unde harum voluptate. Et.',
-    imageUrl: 'https://content.presentermedia.com/files/clipart/00029000/29878/wanted_poster_800_wht.jpg',
-    formUrl: 'https://your-form-url.com',  // Replace with your actual form URL
-    lastDateToRegister: '27/10/2024',
-    eventDate: '28/10/24'
-  });
+  const [newEvent, setNewEvent] = useState({});
+  const [eventsByYear, setEventsByYear] = useState({});
 
-  const [eventsByYear, setEventsByYear] = useState({
-    '2021': [
-      { id: 1, name: 'Event A', description: 'Description of Event A', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-a.pdf' },
-      { id: 2, name: 'Event B', description: 'Description of Event B', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-b.pdf' }
-    ],
-    '2022': [
-      { id: 1, name: 'Event X', description: 'Description of Event X', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-x.pdf' }
-    ],
-    '2025': [
-      { id: 1, name: 'Event Y', description: 'Description of Event Y', imageUrl: 'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29jaWFsJTIwbWVkaXVtfGVufDB8fDB8fHww', pdfUrl: 'https://example.com/event-y.pdf' }
-    ]
-    // Add more years as needed
-  });
+  const fetchEventsData = () => {
+    fetch('https://divi03.github.io/test_api/events.json')
+      .then(response => response.json())
+      .then(data => {
+        setNewEvent(data.newEvent);
+        setEventsByYear(data.eventsByYear);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchEventsData();
+  }, []);
 
   const [isFlipped, setIsFlipped] = useState(false);
 

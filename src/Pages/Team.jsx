@@ -15,12 +15,13 @@ const Team = () => {
         return response.json();
       })
       .then(data => {
+        // console.log(data)
         setData(data);
         // Set the default selected year
         if (data.coordinators) {
           const years = Object.keys(data.coordinators);
           if (years.length > 0) {
-            setSelectedYear(years[0]);
+            setSelectedYear(years[years.length-1]);
           }
         }
       })
