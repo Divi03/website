@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import images from '../Assets/Images'
 
 
 const Home = () => {
-  const imgArr = [
-    // 'https://media.geeksforgeeks.org/wp-content/uploads/20230306120634/unnamed.jpg',
-    'https://plus.unsplash.com/premium_photo-1661898424988-a5f6d40d3db2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-	'https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-	'https://images.unsplash.com/photo-1633493702341-4d04841df53b?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-	'https://plus.unsplash.com/premium_photo-1673589625808-294b22d67848?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
-    ];
+  const [ImageCarousel, setImageCarousel] = useState([]);
 
+  // Function to fetch data from GitHub
+  const fetchImageData = () => {
+    fetch('https://divi03.github.io/test_api/home.json')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setImageCarousel(data.image_carousel);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
 
+  // Function to shuffle the images
+  const shuffleArray = (array) => {
+    return array.slice().sort(() => Math.random() - 0.5);
+  };
 
-	const shuffleArray = (array) => {
-		return array.slice().sort(() => Math.random() - 0.5);
-	};
-	const imgArr2 = shuffleArray(imgArr);
-	const imgArr3 = shuffleArray(imgArr2); 
+  // Use effect to fetch data when the component mounts
+  useEffect(() => {
+    fetchImageData();
+  }, []);
+
+  // Conditionally shuffle and render images after data is fetched
+  const shuffledImages = ImageCarousel.length > 0 ? shuffleArray(ImageCarousel) : [];
+
 
 
   return (
@@ -71,7 +87,7 @@ const Home = () => {
     			{/* Column 1 - Scroll Up to Down */}
     			<div className="slider bg-white h-full w-1/3 overflow-hidden relative">
     				<div className="slide-track flex flex-col animate-scroll-up-slow">
-    					{imgArr.concat(imgArr).map((item, index) => (
+    					{ImageCarousel.concat(ImageCarousel).map((item, index) => (
     					<div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
     						<img src={item} alt="" className="h-full w-full object-cover" />
     					</div>
@@ -82,7 +98,7 @@ const Home = () => {
     			{/* Column 2 - Scroll Down to Up */}
     			<div className="slider bg-white h-full w-1/3 overflow-hidden relative">
     				<div className="slide-track flex flex-col animate-scroll-down-fast">
-    					{imgArr2.concat(imgArr).map((item, index) => (
+    					{ImageCarousel.concat(ImageCarousel).map((item, index) => (
     					<div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
     						<img src={item} alt="" className="h-full w-full object-cover" />
     					</div>
@@ -93,7 +109,7 @@ const Home = () => {
     			{/* Column 3 - Scroll Up to Down (Faster) */}
     			<div className="slider bg-white h-full w-1/3 overflow-hidden relative">
     				<div className="slide-track flex flex-col animate-scroll-up-fast">
-    					{imgArr.concat(imgArr).map((item, index) => (
+    					{ImageCarousel.concat(ImageCarousel).map((item, index) => (
     					<div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
 							<div className="text-white z-40 text-[2rem] hidden hover:block">HI</div>
     						<img src={item} alt="" className="h-full w-full object-cover" />
@@ -105,7 +121,7 @@ const Home = () => {
 
 				{/* <div className="slider bg-white h-full w-1/3 overflow-hidden relative">
 					<div className="slide-track flex flex-col animate-scroll-up-fast">
-						{imgArr.concat(imgArr).map((item, index) => (
+						{ImageCarousel.concat(ImageCarousel).map((item, index) => (
 						<div key={index} className="slide h-[200px] w-[250px] flex-shrink-0 relative group">
 							<div // text appear on hover
 								className="text-white z-40 text-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute inset-0 flex justify-center items-center">
@@ -141,7 +157,7 @@ export default Home;
 // import "./Home.css";
 
 // const Home = () => {
-//   const imgArr = [
+//   const ImageCarousel = [
 //     'https://plus.unsplash.com/premium_photo-1661898424988-a5f6d40d3db2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 //     'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 //     'https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -153,8 +169,8 @@ export default Home;
 //     return array.slice().sort(() => Math.random() - 0.5);
 //   };
 
-//   const imgArr2 = shuffleArray(imgArr);
-//   const imgArr3 = shuffleArray(imgArr2);
+//   const ImageCarousel2 = shuffleArray(ImageCarousel);
+//   const ImageCarousel3 = shuffleArray(ImageCarousel2);
 
 //   const wordsArray = ["Mathematics", "Industry", "Research", "Applications", "Innovation", "Technology",
 //     "Problem-Solving", "Science", "Collaboration"
@@ -281,7 +297,7 @@ export default Home;
 //           {/* Column 1 - Scroll Up to Down */}
 //           <div className="slider bg-white h-full w-1/3 overflow-hidden relative">
 //             <div className="slide-track flex flex-col animate-scroll-up-slow">
-//               {imgArr.concat(imgArr).map((item, index) => (
+//               {ImageCarousel.concat(ImageCarousel).map((item, index) => (
 //                 <div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
 //                   <img src={item} alt="" className="h-full w-full object-cover" />
 //                 </div>
@@ -292,7 +308,7 @@ export default Home;
 //           {/* Column 2 - Scroll Down to Up */}
 //           <div className="slider bg-white h-full w-1/3 overflow-hidden relative">
 //             <div className="slide-track flex flex-col animate-scroll-down-fast">
-//               {imgArr2.concat(imgArr).map((item, index) => (
+//               {ImageCarousel2.concat(ImageCarousel).map((item, index) => (
 //                 <div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
 //                   <img src={item} alt="" className="h-full w-full object-cover" />
 //                 </div>
@@ -303,7 +319,7 @@ export default Home;
 //           {/* Column 3 - Scroll Up to Down (Faster) */}
 //           <div className="slider bg-white h-full w-1/3 overflow-hidden relative">
 //             <div className="slide-track flex flex-col animate-scroll-up-fast">
-//               {imgArr.concat(imgArr3).map((item, index) => (
+//               {ImageCarousel.concat(ImageCarousel3).map((item, index) => (
 //                 <div key={index} className="slide h-[200px] w-[250px] flex-shrink-0">
 //                   <img src={item} alt="" className="h-full w-full object-cover" />
 //                 </div>
